@@ -32,7 +32,7 @@
     self.cameraIconButton.hidden = YES;
     self.photoImageView.hidden = NO;
     
-    self.contentView.hidden = NO;
+    self.hidden = NO;
     
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.networkAccessAllowed = YES;

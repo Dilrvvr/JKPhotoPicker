@@ -175,6 +175,8 @@
 - (void)setPhotoItem:(JKPhotoItem *)photoItem{
     _photoItem = photoItem;
     
+    self.hidden = NO;
+    
     _dataTypeLabel.text = _photoItem.dataTypeDescription;
     
     self.selectIconImageView.highlighted = _photoItem.isSelected;
