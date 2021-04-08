@@ -1265,43 +1265,23 @@ static NSString * const reuseIDSelected = @"JKPhotoSelectedCollectionViewCell"; 
     
     if (indexPath != nil && indexPath.item < self.itemArray.count) {
         
-        [UIView animateWithDuration:0.25 animations:^{
+        if ([self.selectedItemArray containsObject:itm]) {
             
-            [self.bottomCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:NO];
+            [self.selectedItemArray removeObject:itm];
             
-        } completion:^(BOOL finished) {
+            if ([self.selectedAssetArray containsObject:itm.photoAsset]) {
+                
+                [self.selectedAssetArray removeObject:itm.photoAsset];
+            }
             
-            JKPhotoCollectionViewCell *bottomCell = (JKPhotoCollectionViewCell *)[self.bottomCollectionView cellForItemAtIndexPath:indexPath];
+            [self checkSelectAllButton];
             
-            [UIView animateWithDuration:0.25 animations:^{
-                
-                bottomCell.transform = CGAffineTransformMakeScale(0.001, 0.001);
-                bottomCell.alpha = 0;
-                
-            } completion:^(BOOL finished) {
-                
-                bottomCell.hidden = YES;
-                bottomCell.alpha = 1;
-                bottomCell.transform = CGAffineTransformIdentity;
-                
-                if ([self.selectedItemArray containsObject:itm]) {
-                    
-                    [self.selectedItemArray removeObject:itm];
-                    
-                    if ([self.selectedAssetArray containsObject:itm.photoAsset]) {
-                        
-                        [self.selectedAssetArray removeObject:itm.photoAsset];
-                    }
-                    
-                    [self checkSelectAllButton];
-                    
-                    [self.bottomCollectionView deleteItemsAtIndexPaths:@[indexPath]];
-                }
-                
-                [self changeSelectedCount];
-                NSLog(@"取消选中,当前选中了%ld个", (unsigned long)self.selectedItemArray.count);
-            }];
-        }];
+            [self.bottomCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+        }
+        
+        [self changeSelectedCount];
+        
+        NSLog(@"取消选中,当前选中了%ld个", (unsigned long)self.selectedItemArray.count);
         
         return;
     }
@@ -1323,6 +1303,7 @@ static NSString * const reuseIDSelected = @"JKPhotoSelectedCollectionViewCell"; 
     [self.bottomCollectionView reloadData];
     
     [self changeSelectedCount];
+    
     NSLog(@"取消选中,当前选中了%ld个", (unsigned long)self.selectedItemArray.count);
 }
 
