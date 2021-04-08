@@ -67,21 +67,19 @@
     [super setPhotoItem:photoItem];
     self.cameraIconButton.hidden = YES;
     self.photoImageView.hidden = NO;
-    
-    self.contentView.hidden = NO;
 }
 
 // 删除选中的照片
 - (void)deleteButtonClick{
     
     [UIView animateWithDuration:0.25 animations:^{
-        self.contentView.transform = CGAffineTransformMakeScale(0.001, 0.001);
-        self.contentView.alpha = 0;
+        self.transform = CGAffineTransformMakeScale(0.001, 0.001);
+        self.alpha = 0;
         
     } completion:^(BOOL finished) {
-        self.contentView.hidden = YES;
-        self.contentView.alpha = 1;
-        self.contentView.transform = CGAffineTransformIdentity;
+        self.hidden = YES;
+        self.alpha = 1;
+        self.transform = CGAffineTransformIdentity;
         
         !self.deleteButtonClickBlock ? : self.deleteButtonClickBlock(self);
     }];

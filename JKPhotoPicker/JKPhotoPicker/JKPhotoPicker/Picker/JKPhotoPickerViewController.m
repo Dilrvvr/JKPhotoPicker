@@ -1267,7 +1267,7 @@ static NSString * const reuseIDSelected = @"JKPhotoSelectedCollectionViewCell"; 
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            [self.bottomCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:false];
+            [self.bottomCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:NO];
             
         } completion:^(BOOL finished) {
             
@@ -1275,14 +1275,14 @@ static NSString * const reuseIDSelected = @"JKPhotoSelectedCollectionViewCell"; 
             
             [UIView animateWithDuration:0.25 animations:^{
                 
-                bottomCell.contentView.transform = CGAffineTransformMakeScale(0.001, 0.001);
-                bottomCell.contentView.alpha = 0;
+                bottomCell.transform = CGAffineTransformMakeScale(0.001, 0.001);
+                bottomCell.alpha = 0;
                 
             } completion:^(BOOL finished) {
                 
-                bottomCell.contentView.hidden = YES;
-                bottomCell.contentView.alpha = 1;
-                bottomCell.contentView.transform = CGAffineTransformIdentity;
+                bottomCell.hidden = YES;
+                bottomCell.alpha = 1;
+                bottomCell.transform = CGAffineTransformIdentity;
                 
                 if ([self.selectedItemArray containsObject:itm]) {
                     
